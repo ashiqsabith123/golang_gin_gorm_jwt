@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<script src="/static/script.js"></script>
+    <style>
+        .form-control:focus {
+        border-color: #060606;
+        box-shadow: 0 0 0 0.2rem rgba(40, 40, 40, 0.40);
+    } 
+
+	.switch {
+  position: relative;
+  display: inline-block;
+  width: 54px;
+  height: 22px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 15px;
+  width: 20px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input+ .slider {
+  background-color: black;
+}
+
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+    </style>
+   <script src="https://kit.fontawesome.com/a815a59ac0.js" crossorigin="anonymous"></script>
+</head>
+<body class="bg-dark">
+	<section id="student">
+		<div class="container h-100">
+			<div class="row justify-content-sm-center h-100 my-5">
+				<div class="col-xxl-4 col-xl-5 col-lg-5 col-md-7 col-sm-9 my-5">
+					<div class="card shadow-lg">
+						<div class="card-body p-5">
+							<div class="d-flex justify-content-between">
+								<div><h1 class="fs-4 card-title fw-bold mb-4">Login</h1></div>
+							
+							</div>
+							<form method="POST" class="needs-validation" novalidate="" autocomplete="off">
+								<div class="mb-3">
+									<label class="mb-2 text-muted" for="email">Username</label>
+									<input id="logintext" type="text" class="form-control" name="username" value="" onkeyup="validate()" required autofocus>
+									<div id="usernamevalid" class="invalid-feedback">
+										Username is invalid
+									</div>
+								</div>
+
+								<div class="mb-3">
+									<div class="mb-2 w-100">
+										<label class="text-muted" for="password">Password</label>
+										
+									</div>
+									<input id="loginpassword" type="password" class="form-control" name="password" onkeyup="validate()" required>
+									<div id="passwordvalid" class="invalid-feedback">
+										Pasword is invalid
+									</div>
+								</div>
+
+								{{ if  .Error }}
+								<div class="alert alert-danger">{{ .Error }}</div>
+							{{ end }}
+
+								<div class="d-flex align-items-center justify-content-center">
+									
+									<button id="buttonid" type="submit" class="btn btn-dark w-75">
+										Login
+									</button>
+								</div>
+							</form>
+						</div>
+						<div class="card-footer py-3 border-0">
+							<div class="col-md-12 d-flex justify-content-between" >
+
+								<div class="pt-2">
+									<p style="display: inline; margin-right: 5px;">Student</p>
+									<label class="switch">
+									<input type="checkbox"  id="checkbox1"  onchange="check()">
+									<span class="slider round"></span>
+								  </label>
+								  <p style="display: inline; margin-left: 5px;">Admin </p>
+								</div>
+								<div>
+									<a href="/signup"><button type="submit" class="btn btn-dark float-end ">
+										Create<i style="margin-left: 7px; " class="fa-solid fa-arrow-right"></i>
+									  </button></a>
+								</div>
+								
+							</div>
+						</div>
+					</div>
+				
+				</div>
+			</div>
+		</div>
+
+       
+	</section>
+
+	<section id="admin" style="display: none;">
+		<div class="container h-100">
+			<div class="row justify-content-sm-center h-100 my-5">
+				<div class="col-xxl-4 col-xl-5 col-lg-5 col-md-7 col-sm-9 my-5">
+					<div class="card shadow-lg">
+						<div class="card-body p-5">
+							<div class="d-flex justify-content-between">
+								<div><h1 class="fs-4 card-title fw-bold mb-4">Login</h1></div>
+							
+							</div>
+							<form method="POST" action="/adminlogin" method="POST" class="needs-validation" novalidate="" autocomplete="off">
+								<div class="mb-3">
+									<label class="mb-2 text-muted" for="email">Username</label>
+									<input id="text" type="text" class="form-control" name="admin_username" value="" required autofocus>
+									<div class="invalid-feedback">
+										Email is invalid
+									</div>
+								</div>
+
+								<div class="mb-3">
+									<div class="mb-2 w-100">
+										<label class="text-muted" for="password">Password</label>
+										
+									</div>
+									<input id="password" type="password" class="form-control" name="admin_password" required>
+								    <div class="invalid-feedback">
+								    	Password is required
+							    	</div>
+								</div>
+
+								{{ if  .Erro }}
+								<div class="alert alert-danger">{{ .Erro }}</div>
+							{{ end }}
+
+								<div class="d-flex align-items-center justify-content-center">
+									
+									<button  type="submit" class="btn btn-dark w-75">Login</button>
+								</div>
+							</form>
+						</div>
+						<div class="card-footer py-3 border-0">
+							<div class="col-md-12 d-flex justify-content-between" >
+
+								<div class="pt-2">
+									<p style="display: inline; margin-right: 5px;">Student</p>
+									<label class="switch">
+									<input type="checkbox" id="checkbox2"  onchange="check()" >
+									<span class="slider round"></span>
+								  </label>
+								  <p style="display: inline; margin-left: 5px;">Admin </p>
+								</div>
+								
+								
+							</div>
+						</div>
+					</div>
+				
+				</div>
+			</div>
+		</div>
+
+       
+	</section>
+
+
+
+    
+	
+
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+</body>
+</html>

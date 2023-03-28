@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://kit.fontawesome.com/a815a59ac0.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="/static/script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+    <style>
+        .icons:hover{
+            color: #d9ffff;
+            transition: ease-in-out .2s;
+        }
+
+        .bt:focus{
+            outline: none;
+        }
+
+        .bt{
+            border: none;
+            background: transparent;
+        }
+
+        .adt:hover{
+            background-color: #EB7361 !important;
+        }
+
+        .close:hover{
+            color: red;
+            transition: ease-in-out .2s;
+        }
+    </style>
+
+
+
+<div class="col-md-12 h-100" style="background-color: transparent; backdrop-filter: blur(10px); display: none; position: absolute; z-index: 1;" id="editdepartment">
+    <div class="container d-flex justify-content-center w-100">
+        <div class="outer w-100">
+           
+           
+
+           <div class="container h-100">
+            <div class="row justify-content-sm-center h-100 my-5">
+                <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-7 col-sm-9 my-5">
+                    <div class="card shadow-lg">
+                        <div class="card-body p-5">
+                            <div class="col-md-12 d-flex justify-content-end">
+                                <button class="bt " onclick="clos()"><i class=" fa-solid fa-xmark close" style="font-size: 25px; font-weight: 700;"></i></button>
+                            </div>
+                            <h1 class="fs-4 card-title fw-bold mb-4">Edit Department</h1>
+                            <form method="POST" action="/adddepartment" class="needs-validation" novalidate="" autocomplete="off">
+                                <div class="mb-3">
+                                    <label class="mb-2 text-muted" for="email">Department name</label>
+                                    <input id="text" type="text" class="form-control" name="department" value="" required autofocus>
+                                    <div class="invalid-feedback">
+                                        Email is invalid
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="mb-3 col-md-4">
+                                        <div class="mb-2 w-100">
+                                            <label class="text-muted" for="password">Id</label>
+                                            
+                                        </div>
+                                        <input id="text" type="text" class="form-control" name="dep_id" required>
+                                        <div class="invalid-feedback">
+                                            Password is required
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 col-md-8">
+                                        <div class="mb-2 w-100">
+                                            <label class="text-muted" for="password">Head of department</label>
+                                            
+                                        </div>
+                                        <input id="password" type="text" class="form-control" name="hod_name" required>
+                                        <div class="invalid-feedback">
+                                            Password is required
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex align-items-center justify-content-center mt-2">
+                                    
+                                    <button type="submit" class="btn btn-dark w-75">
+                                        Submit
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                        
+                    </div>
+                
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="col-md-12 h-100" style="background-color: transparent; backdrop-filter: blur(10px); position: absolute; z-index: 1; display: none;" id="addstudent">
+    <div class="container d-flex justify-content-center w-100">
+        <div class="outer w-100">
+           
+           
+
+           <div class="container h-100">
+            <div class="row justify-content-sm-center h-100 my-1">
+                <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-7 col-sm-9 my-5 w-50">
+                    <div class="card shadow-lg">
+						<div class="card-body p-5">
+                            <div class="col-md-12 d-flex justify-content-end">
+                                <button class="bt " onclick="clos()"><i class=" fa-solid fa-xmark close" style="font-size: 25px; font-weight: 700;"></i></button>
+                            </div>
+							<h1 class="fs-4 card-title fw-bold mb-4">Add Student</h1>
+							<form action="/addstudent" method="POST" class="row g-3 needs-validation" novalidate>
+								<div class="col-md-6 ">
+								  <label for="validationCustom01" class="form-label">First name</label>
+								  <input type="text" class="form-control" id="validationCustom01" name="fname"  required>
+								  <div class="valid-feedback">
+									Looks good!
+								  </div>
+								</div>
+								<div class="col-md-6">
+									<label for="validationCustom02" class="form-label">Last name</label>
+									<input type="text" class="form-control" id="validationCustom02" name="lname" required>
+									<div class="valid-feedback">
+									  Looks good!
+									</div>
+								  </div>
+
+								  <div class="col-md-12">
+									<label for="validationCustom03" class="form-label">Email</label>
+									<input type="email" class="form-control" id="validationCustom03" name="email" required>
+									<div class="invalid-feedback">
+									  Please provide a valid Email.
+									</div>
+								  </div>
+								<div class="col-md-6">
+								  <label for="validationCustom02" class="form-label">Phone Number</label>
+								  <input type="tel" class="form-control" id="validationCustom02" name="phone" required>
+								  <div class="valid-feedback">
+									Looks good!
+								  </div>
+								</div>
+								<div class="col-md-6">
+									<label for="validationCustom02" class="form-label">Date Of Birth</label>
+									<input type="date" class="form-control" id="validationCustom02" name="date" required>
+									<div class="valid-feedback">
+									  Looks good!
+									</div>
+								  </div>
+
+
+								  <div class="col-md-3">
+									<label for="validationCustom02" class="form-label">Department Id</label>
+									<select name="dep_id" id="" class="form-select">
+										<option value="786">786</option>
+										<option value="897">897</option>
+										<option value="675">675</option>
+									</select>
+									<div class="valid-feedback">
+									  Looks good!
+									</div>
+								  </div>
+
+								
+
+								  <div class="col-md-9">
+									<label for="validationCustom02" class="form-label">Place</label>
+									<input type="text" class="form-control" id="validationCustom02" name="place" required>
+									<div class="valid-feedback">
+									  Looks good!
+									</div>
+								  </div>
+								
+								<div class="col-md-12">
+								  <label for="validationCustomUsername" class="form-label">Username</label>
+								  <div class="input-group has-validation">
+									<span class="input-group-text" id="inputGroupPrepend">@</span>
+									<input type="text" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" name="username" required>
+									<div class="invalid-feedback">
+									  Please choose a username.
+									</div>
+								  </div>
+								</div>
+								
+								
+								<div class="col-md-12">
+								  <label for="validationCustom05" class="form-label">Password</label>
+								  <input type="password" class="form-control" id="validationCustom05" name="password" required>
+								  <div class="invalid-feedback">
+									Please provide a valid password.
+								  </div>
+								</div>
+								<!-- <div class="col-12">
+								  <div class="form-check">
+									<input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+									<label class="form-check-label" for="invalidCheck">
+									  Agree to terms and conditions
+									</label>
+									<div class="invalid-feedback">
+									  You must agree before submitting.
+									</div>
+								  </div>
+								</div> -->
+								<div class="col-12 d-flex justify-content-center">
+								  <button class="btn btn-dark w-75" type="submit" >Submit</button>
+								</div>
+							  </form>
+						</div>
+						
+					</div>
+                
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-12 h-100" style="background-color: transparent; backdrop-filter: blur(10px); position: absolute; z-index: 1; display: none;" id="editstudent">
+    <div class="container d-flex justify-content-center w-100">
+        <div class="outer w-100">
+           
+           
+
+           <div class="container h-100">
+            <div class="row justify-content-sm-center h-100 my-1">
+                <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-7 col-sm-9 my-5 w-50">
+                    <div class="card shadow-lg">
+						<div class="card-body p-5">
+                            <div class="col-md-12 d-flex justify-content-end">
+                                <button class="bt " onclick="clos()"><i class=" fa-solid fa-xmark close" style="font-size: 25px; font-weight: 700;"></i></button>
+                            </div>
+							<h1 class="fs-4 card-title fw-bold mb-4">Edit Student</h1>
+							<form action="/updatestudent" method="POST" class="row g-3 needs-validation" novalidate>
+								<div class="col-md-6 ">
+								  <label for="validationCustom01" class="form-label">First name</label>
+								  <input type="text" class="form-control" id="edfname" name="edfname"  required>
+								  <div class="valid-feedback">
+									Looks good!
+								  </div>
+								</div>
+								<div class="col-md-6">
+									<label for="validationCustom02" class="form-label">Last name</label>
+									<input type="text" class="form-control" id="edlname" name="edlname" required>
+									<div class="valid-feedback">
+									  Looks good!
+									</div>
+								  </div>
+
+								  <div class="col-md-12">
+									<label for="validationCustom03" class="form-label">Email</label>
+									<input type="email" class="form-control" id="edemail" name="edemail" required>
+									<div class="invalid-feedback">
+									  Please provide a valid Email.
+									</div>
+								  </div>
+								<div class="col-md-6">
+								  <label for="validationCustom02" class="form-label">Phone Number</label>
+								  <input type="tel" class="form-control" id="edphone" name="edphone" required>
+								  <div class="valid-feedback">
+									Looks good!
+								  </div>
+								</div>
+								<div class="col-md-6">
+									<label for="validationCustom02" class="form-label">Date Of Birth</label>
+									<input type="date" class="form-control" id="eddate" name="eddate" required>
+									<div class="valid-feedback">
+									  Looks good!
+									</div>
+								  </div>
+
+
+								  <div class="col-md-3">
+									<label for="validationCustom02" class="form-label">Department Id</label>
+									<select name="dep_id" id="" class="form-select">
+										<option value="786">786</option>
+										<option value="897">897</option>
+										<option value="675">675</option>
+									</select>
+									<div class="valid-feedback">
+									  Looks good!
+									</div>
+								  </div>
+
+								
+
+								  <div class="col-md-9">
+									<label for="validationCustom02" class="form-label">Place</label>
+									<input type="text" class="form-control" id="edplace" name="edplace" required>
+									<div class="valid-feedback">
+									  Looks good!
+									</div>
+								  </div>
+								
+								<div class="col-md-12">
+								  <label for="validationCustomUsername" class="form-label">Username</label>
+								  <div class="input-group has-validation">
+									<span class="input-group-text" id="inputGroupPrepend">@</span>
+									<input type="text" class="form-control" id="edusername" aria-describedby="inputGroupPrepend" name="edusername" required>
+									<div class="invalid-feedback">
+									  Please choose a username.
+									</div>
+								  </div>
+								</div>
+								
+								
+								<div class="col-md-12">
+								  <label for="validationCustom05" class="form-label">Password</label>
+								  <input type="password" class="form-control" id="validationCustom05" name="edpassword" required>
+								  <div class="invalid-feedback">
+									Please provide a valid password.
+								  </div>
+								</div>
+
+                                <input type="text" name="edid" id="edid" hidden>
+								
+								<div class="col-12 d-flex justify-content-center">
+								  <button class="btn btn-dark w-75" type="submit" >Submit</button>
+								</div>
+							  </form>
+						</div>
+						
+					</div>
+                
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+
+    <div class="col-md-12 h-100" style="background-color: transparent; backdrop-filter: blur(10px); display: none; position: absolute; z-index: 1;" id="adddepartment">
+        <div class="container d-flex justify-content-center w-100">
+            <div class="outer w-100">
+               
+               
+
+               <div class="container h-100">
+                <div class="row justify-content-sm-center h-100 my-5">
+                    <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-7 col-sm-9 my-5">
+                        <div class="card shadow-lg">
+                            <div class="card-body p-5">
+                                <div class="col-md-12 d-flex justify-content-end">
+                                    <button class="bt " onclick="clos()"><i class=" fa-solid fa-xmark close" style="font-size: 25px; font-weight: 700;"></i></button>
+                                </div>
+                                <h1 class="fs-4 card-title fw-bold mb-4">Add Department</h1>
+                                <form method="POST" action="/adddepartment" class="needs-validation" novalidate="" autocomplete="off">
+                                    <div class="mb-3">
+                                        <label class="mb-2 text-muted" for="email">Department name</label>
+                                        <input id="text" type="text" class="form-control" name="department" value="" required autofocus>
+                                        <div class="invalid-feedback">
+                                            Email is invalid
+                                        </div>
+                                    </div>
+    
+                                    <div class="row">
+                                        <div class="mb-3 col-md-4">
+                                            <div class="mb-2 w-100">
+                                                <label class="text-muted" for="password">Id</label>
+                                                
+                                            </div>
+                                            <input id="text" type="text" class="form-control" name="dep_id" required>
+                                            <div class="invalid-feedback">
+                                                Password is required
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 col-md-8">
+                                            <div class="mb-2 w-100">
+                                                <label class="text-muted" for="password">Head of department</label>
+                                                
+                                            </div>
+                                            <input id="password" type="text" class="form-control" name="hod_name" required>
+                                            <div class="invalid-feedback">
+                                                Password is required
+                                            </div>
+                                        </div>
+                                    </div>
+    
+                                    <div class="d-flex align-items-center justify-content-center mt-2">
+                                        
+                                        <button type="submit" class="btn btn-dark w-75">
+                                            Submit
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                            
+                        </div>
+                    
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-md-12 h-100" style="background-color: transparent; backdrop-filter: blur(10px); display: none; position: absolute; z-index: 1;" id="addadmin">
+        <div class="container d-flex justify-content-center w-100">
+            <div class="outer w-100">
+               
+               
+
+               <div class="container h-100">
+                <div class="row justify-content-sm-center h-100 my-5">
+                    <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-7 col-sm-9 my-5">
+                        <div class="card shadow-lg">
+                            <div class="card-body p-5">
+                                <div class="col-md-12 d-flex justify-content-end">
+                                    <button class="bt " onclick="clos()"><i class=" fa-solid fa-xmark close" style="font-size: 25px; font-weight: 700;"></i></button>
+                                </div>
+                                <h1 class="fs-4 card-title fw-bold mb-4">Add Admin</h1>
+                                <form method="POST" action="/addadmin" class="needs-validation" novalidate="" autocomplete="off">
+                                    <div class="mb-3">
+                                        <label class="mb-2 text-muted" for="email">Name</label>
+                                        <input id="text" type="text" class="form-control" name="admin_name" value="" required autofocus>
+                                        <div class="invalid-feedback">
+                                            Email is invalid
+                                        </div>
+                                    </div>
+    
+                                    <div class="row">
+                                        <div class="mb-3 col-md-12">
+                                            <div class="mb-2 w-100">
+                                                <label class="text-muted" for="password">Username</label>
+                                                
+                                            </div>
+                                            <input id="text" type="text" class="form-control" name="admin_username" required>
+                                            <div class="invalid-feedback">
+                                                Password is required
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 col-md-12">
+                                            <div class="mb-2 w-100">
+                                                <label class="text-muted" for="password">Password</label>
+                                                
+                                            </div>
+                                            <input id="text" type="text" class="form-control" name="admin_password" required>
+                                            <div class="invalid-feedback">
+                                                Password is required
+                                            </div>
+                                        </div>
+                                    </div>
+    
+                                    <div class="d-flex align-items-center justify-content-center mt-2">
+                                        
+                                       <button type="submit" class="btn btn-dark w-75">Submit</button>
+                                    </div>
+                                </form>
+                            </div>
+                            
+                        </div>
+                    
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+    
+   <div class="col-md-12" style="background-color: #67658d;">
+    <div class="container">
+        <div class="row" >
+            <nav class="navbar" >
+                <div class="container-fluid">
+                  <a class="navbar-brand"><h4>Admin Panel</h4></a>
+                  
+                  <form class="d-flex" role="search">
+                    
+                    <a href="/adminlogout" class="btn btn-danger" >Sign Out</a>
+                  </form>
+                </div>
+              </nav>
+        </div>
+    </div>
+</div>
+
+
+<div class="col-md-12">
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-1 col-3 ps-4 pt-5 d-flex flex-column " style="background-color: #999a99;">
+                <div class="icon mb-5">
+                    <div class="container">
+                        <button class="bt" onclick="openHome()"><i class="fa-solid icons fa-house" style="font-size: 30px;"></i></button>
+                    </div>
+                </div>
+
+                <div class="icon mb-5">
+                    <div class="container">
+                        <button class="bt" onclick="openStudents()"><i class="fa-solid icons fa-user" style="font-size: 30px;"></i></button>
+                    </div>
+                </div>
+
+                <div class="icon mb-5">
+                    <div class="container">
+                        <button class="bt" onclick="openDepartment()"><i class="fa-solid icons fa-building-user" style="font-size: 30px;"></i></button>
+                    </div>
+                </div>
+
+                <div class="icon mb-5">
+                    <div class="container">
+                        <button class="bt" onclick="add()"><i class=" fa-solid icons fa-user-plus" style="font-size: 30px;"></i></button>
+                    </div>
+                </div>
+                
+            </div>
+
+           <div id="home" class="col-md-11 col-9">
+            <div class="row">
+                <div class="col-md-6" >
+                    <div class="contatiner d-flex justify-content-center w-100 pt-5 pb-3">
+                   
+                        <svg xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" width="613.35286" height="600.56123" viewBox="0 0 613.35286 700.56123" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M587.667,756.93133l-.78168-17.57606q-.12187-.06468-.24405-.12879c-8.37606-4.39513-17.97576,3.561-15.3004,12.63392,2.51722,8.5366,4.20846,17.73958,8.81613,25.21162a34.14441,34.14441,0,0,0,25.03847,15.77861l10.64166,6.51555a57.21525,57.21525,0,0,0-12.05953-46.36368,55.2668,55.2668,0,0,0-10.157-9.4375C591.07189,750.28541,587.667,756.93133,587.667,756.93133Z" transform="translate(-293.32357 -99.71938)" fill="#f2f2f2"/><path d="M492.3909,578.56387c-20.48783-21.12931-50.17767-33.24712-81.45666-33.24712l-1.20652.00324a116.3146,116.3146,0,0,1-58.63546-15.83485l-1.85205-1.07912,1.49167-1.537a113.37272,113.37272,0,0,0,19.99317-28.30616,34.28239,34.28239,0,0,1-27.66751,8.93789,35.10416,35.10416,0,0,1-25.77016-16.50626c-10.93231-17.73787-23.96381-42.90658-23.96381-62.0803a116.66888,116.66888,0,0,1,38.0631-86.091,72.65143,72.65143,0,0,0,23.99981-54.17137l-.00607-1.45284a164.77416,164.77416,0,0,1,4.8908-39.87268l.33005-1.31694,1.355.04732a111.39121,111.39121,0,0,0,26.04681-2.1821,87.918,87.918,0,0,1-23.35954-6.213l-1.45769-.58971.4947-1.4937C397.78172,214.464,474.7579,225.398,519.43718,123.17462,555.666,40.28535,683.49348,196.75549,683.49348,287.199c0,9.2287-9.13324,21.42423-2.29615,27.52391,73.90979,65.93827,22.91308,108.27972,6.83466,150.88534-3.81479,10.10871,4.45682,21.20613,4.45682,32.14249,0,1.85569-.04732,3.77124-.14076,5.69327l-.14237,2.955-2.46441-1.63971a81.62563,81.62563,0,0,1-13.47964-11.05649,71.13531,71.13531,0,0,1-2.25612,61.41172c-7.74552,14.619-15.23907,25.085-22.27193,31.10507a116.2904,116.2904,0,0,1-159.34268-7.65574Z" transform="translate(-293.32357 -99.71938)" fill="#e6e6e6"/><path d="M616.13152,798.499a2.09333,2.09333,0,0,0,2.06993-1.79837c.08893-.62489,8.80049-63.45379.97652-146.956-7.22548-77.11632-30.4294-188.191-99.9393-279.41478a2.0935,2.0935,0,1,0-3.33028,2.53775c68.90954,90.436,91.9264,200.69567,99.10094,277.2675,7.77849,83.01636-.86476,145.3553-.953,145.97542a2.09519,2.09519,0,0,0,2.0752,2.38851Z" transform="translate(-293.32357 -99.71938)" fill="#3f3d56"/><path d="M559.40732,499.0052a2.09343,2.09343,0,0,0,1.23242-3.78686c-.25231-.18331-25.681-18.50562-63.69657-32.425-35.14253-12.86589-88.582-24.5297-143.597-7.02036a2.0932,2.0932,0,1,0,1.26956,3.98925c53.88785-17.14953,106.35862-5.67858,140.88784,6.96312,37.47293,13.72044,62.427,31.7,62.67472,31.87988A2.08515,2.08515,0,0,0,559.40732,499.0052Z" transform="translate(-293.32357 -99.71938)" fill="#3f3d56"/><path d="M655.2196,260.37275a2.09343,2.09343,0,0,0-3.68827-1.50192c-.201.23845-20.307,24.28166-36.928,61.19609-15.36327,34.12475-30.84523,86.58548-17.34326,142.71855a2.09319,2.09319,0,1,0,4.07031-.979c-13.22427-54.983,1.99558-106.49141,17.09108-140.02058,16.38342-36.38756,36.11335-59.982,36.31062-60.21616A2.0852,2.0852,0,0,0,655.2196,260.37275Z" transform="translate(-293.32357 -99.71938)" fill="#3f3d56"/><path d="M652.38648,368.31675c1.76623,14.25037,11.64059,26,26,26a26,26,0,0,0,26-26c0-14.3594-11.70215-24.67241-26-26C663.21558,340.90809,650.11884,350.02107,652.38648,368.31675Z" transform="translate(-293.32357 -99.71938)" fill="#2f2e41"/><polygon points="397.105 687.328 407.006 687.327 411.716 649.137 397.103 649.138 397.105 687.328" fill="#ffb6b6"/><path d="M690.08055,797.37579l30.447-.00116v-.385A11.85149,11.85149,0,0,0,708.67674,785.139H708.676l-5.56152-4.21923-10.37659,4.21991-2.65783.00006Z" transform="translate(-293.32357 -99.71938)" fill="#2f2e41"/><polygon points="358.105 687.328 368.006 687.327 372.716 649.137 358.103 649.138 358.105 687.328" fill="#ffb6b6"/><path d="M651.08055,797.37579l30.447-.00116v-.385A11.85149,11.85149,0,0,0,669.67674,785.139H669.676l-5.56152-4.21923-10.37659,4.21991-2.65783.00006Z" transform="translate(-293.32357 -99.71938)" fill="#2f2e41"/><path d="M724.50065,547.85614l7,24L723.25419,673.501s4.24646,6.35511,1.24646,6.35511-6.84686,1.40942-4.4234,5.20471-5.86,17.4209-5.86,17.4209l-11.71661,72.37439-14.92914-.22046s-7.59009-4.22833-3.3305-8.504,7.25958-4.27557,3.25958-8.27557-4-2.79529-4-5.89765-4.00751-41.01574,5.49628-55.559l-2.86365-59.29529-6.74457,58.16144-13.888,77.59052-14.38171-.11847s-6.64276-6.40271-6.6305-11.14209,4.10419-5.13312,1.05823-7.93628-3.046-45.86615,5.954-69.80316c0,0,5.09108-13.37393-.01155-17.95666s-.00631-9.82652-.00631-9.82652,8.08172-2.92145-.0073-11.33883-.04369-67.94913-.04369-67.94913-8.84271-24.03067.1131-33.47977S724.50065,547.85614,724.50065,547.85614Z" transform="translate(-293.32357 -99.71938)" fill="#2f2e41"/><path d="M599.82611,589.20574l12.48925-30.1823,9.84,5.46667-5.94253,30.70307a10.93464,10.93464,0,1,1-16.38671-5.98744Z" transform="translate(-293.32357 -99.71938)" fill="#ffb6b6"/><path d="M809.4002,350.535l-19.00315,26.56751-8.34544-7.554,12.7447-28.5581A10.93464,10.93464,0,1,1,809.4002,350.535Z" transform="translate(-293.32357 -99.71938)" fill="#ffb6b6"/><path d="M726.38648,550.31675c12.32568,19.11831-49.63137,43.38055-73.40448,33.64-4.1628-1.7056-18.48212-7.33918-8.69439-15.14958s-1.1348-8.90952-1.393-13.99392c-.1726-3.39918,2.45917-10.85592-.28674-10.5362s-5.95975-4.3811.0205-6.404.06411-3.86767.11651-5.78787c.57186-20.95538,16.64979-54.2869,16.64979-54.2869l-28.971,74.05682s.214,12.81223-3.48049,8.897-3.42565,8.75675-3.42565,8.75675-5.49354,3.83389-2.33452,5.9676-3.401,8.6937-3.401,8.6937l-15.30666-1.09334s.23964-11.37068,2.85315-13.88533,1.32975-6.47144,1.32975-6.47144,6.80457-6.02348,2.24268-10.91429c-5.86712-6.29013,15.52417-112.52993,22.90637-111.47784a28.12048,28.12048,0,0,1,20.08017-21.45161l16.53221-4.55191,2.93564-11.64749h23.27852l4.0548,7.65333,17.69783,7.98657c3.33362-4.70352,5.82477-9.65991,19.47546-11.26657,0,0,36.78255-33.46683,34.98668-36.08s3.906-8.73109,3.906-8.73109,4.86956-1.59377,2.12179-2.44467,2.446-2.81826,2.446-2.81826,4.81028-1.264,2.54157-2.92832,7.57128-2.75765,7.57128-2.75765l12.767,10.4168-2.58037,4.37541s1.5733,5.958-.48,3.78289-2.43983,4.1371-2.43983,4.1371-1.0486,6.912-7.26682,8.99446S778.502,404.8635,778.502,404.8635c-14.6648,19.0673-31.97132,33.9415-52.48,43.73331C734.01483,457.77113,726.38648,550.31675,726.38648,550.31675Z" transform="translate(-293.32357 -99.71938)" fill="#67658d"/><circle cx="387.93692" cy="273.08556" r="23.0557" fill="#ffb6b6"/><path d="M657.38648,375.31675c.73,5.01,5,12,4,12s-8.11-20.65332-1-22c5.15722-.97681,6.31-.12,11.13-2.21l-.68.64c3.19,2.32,7.63.89,11.27-.62,3.65-1.5,8.08-2.93,11.28-.62,2.01,1.45,2.86,3.97,4.11,6.11,1.25,2.15,3.56,4.18,5.94,3.52,1.91-.53,3.01-2.67005,3-4.65s-2.58825-3.86355-1.72-5.64c2.57319-5.26444.25916-8.85275-5.35-11.33q-3.06-.465-6.12-.95a17.35842,17.35842,0,0,1,3.84-3.86,8.77436,8.77436,0,0,0-3.1-3.97c-1.63-.97-3.65-.9-5.54-.8q-6.33.33-12.65.66c-3.12.16-6.35.35-9.13995,1.78-3.48,1.79-5.76,5.28-7.42005,8.83C655.51648,360.18675,656.10645,366.60679,657.38648,375.31675Z" transform="translate(-293.32357 -99.71938)" fill="#2f2e41"/><path d="M561.476,799.97328l226.75.30734a1.19068,1.19068,0,1,0,0-2.38137l-226.75-.30733a1.19068,1.19068,0,0,0,0,2.38136Z" transform="translate(-293.32357 -99.71938)" fill="#cacaca"/><ellipse cx="471.98821" cy="695.09416" rx="5.25681" ry="7.55666" transform="translate(-577.14417 962.36498) rotate(-81.72174)" fill="#e6e6e6"/><ellipse cx="521.15973" cy="690.29611" rx="5.2568" ry="7.55666" transform="translate(-530.30434 1006.91693) rotate(-81.72174)" fill="#3f3d56"/><ellipse cx="458.5236" cy="655.286" rx="5.25681" ry="7.55666" transform="translate(-549.27676 914.96411) rotate(-81.72174)" fill="#ff6584"/><ellipse cx="441.31304" cy="640.04291" rx="4.77581" ry="3.3223" transform="translate(-495.37215 976.78425) rotate(-89.56675)" fill="#e6e6e6"/><ellipse cx="434.06731" cy="609.6713" rx="4.77581" ry="3.3223" transform="translate(-472.19234 939.39678) rotate(-89.56675)" fill="#3f3d56"/><ellipse cx="490.41248" cy="663.12322" rx="4.77581" ry="3.3223" transform="translate(-469.72363 1048.78806) rotate(-89.56675)" fill="#e6e6e6"/><ellipse cx="466.65067" cy="674.98721" rx="4.77581" ry="3.3223" transform="translate(-505.16941 1036.80122) rotate(-89.56675)" fill="#ff6584"/><ellipse cx="499.72794" cy="696.91495" rx="4.77581" ry="3.3223" transform="translate(-494.26937 1091.63947) rotate(-89.56675)" fill="#3f3d56"/><ellipse cx="849.98821" cy="541.09416" rx="5.25681" ry="7.55666" transform="translate(-101.17347 1204.59943) rotate(-81.72174)" fill="#e6e6e6"/><ellipse cx="899.15973" cy="536.29611" rx="5.2568" ry="7.55666" transform="translate(-54.33364 1249.15138) rotate(-81.72174)" fill="#3f3d56"/><ellipse cx="836.5236" cy="501.286" rx="5.25681" ry="7.55666" transform="matrix(0.14398, -0.98958, 0.98958, 0.14398, -73.30606, 1157.19856)" fill="#ff6584"/><ellipse cx="819.31304" cy="486.04292" rx="4.77581" ry="3.3223" transform="translate(33.76519 1201.93792) rotate(-89.56675)" fill="#e6e6e6"/><ellipse cx="812.06731" cy="455.6713" rx="4.77581" ry="3.3223" transform="translate(56.94499 1164.55045) rotate(-89.56675)" fill="#3f3d56"/><ellipse cx="868.41248" cy="509.12322" rx="4.77581" ry="3.3223" transform="translate(59.41371 1273.94173) rotate(-89.56675)" fill="#e6e6e6"/><ellipse cx="844.65067" cy="520.98721" rx="4.77581" ry="3.3223" transform="translate(23.96793 1261.95489) rotate(-89.56675)" fill="#ff6584"/><ellipse cx="877.72794" cy="542.91495" rx="4.77581" ry="3.3223" transform="translate(34.86796 1316.79314) rotate(-89.56675)" fill="#3f3d56"/><ellipse cx="666.98821" cy="256.09416" rx="5.25681" ry="7.55666" transform="translate(24.20544 779.54069) rotate(-81.72174)" fill="#fff"/><ellipse cx="716.15973" cy="251.29611" rx="5.2568" ry="7.55666" transform="translate(71.04527 824.09264) rotate(-81.72174)" fill="#3f3d56"/><ellipse cx="653.5236" cy="216.286" rx="5.25681" ry="7.55666" transform="translate(52.07285 732.13983) rotate(-81.72174)" fill="#ff6584"/><ellipse cx="636.31304" cy="201.04292" rx="4.77581" ry="3.3223" transform="translate(137.1408 736.09819) rotate(-89.56675)" fill="#e6e6e6"/><ellipse cx="629.06731" cy="170.6713" rx="4.77581" ry="3.3223" transform="translate(160.32061 698.71071) rotate(-89.56675)" fill="#3f3d56"/><ellipse cx="685.41248" cy="224.12322" rx="4.77581" ry="3.3223" transform="translate(162.78933 808.102) rotate(-89.56675)" fill="#e6e6e6"/><ellipse cx="661.65067" cy="235.98721" rx="4.77581" ry="3.3223" transform="translate(127.34354 796.11516) rotate(-89.56675)" fill="#ff6584"/><ellipse cx="694.72794" cy="257.91495" rx="4.77581" ry="3.3223" transform="translate(138.24358 850.95341) rotate(-89.56675)" fill="#3f3d56"/></svg>
+                   </div>
+                      
+                </div>
+                <div class="col-md-5 d-flex flex-column justify-content-center">
+                
+                   
+                    <h2>Welcome to admin panel</h2>
+                </div>
+            </div>
+
+            </div>
+
+            
+        
+            
+
+            <div class="col-md-11" style="background-color: #c3c0d0; display: none;" id="students" >
+                <div class="container-fluid">
+                    <div class="row ">  
+                        <div class="d-flex justify-content-between pt-3">
+
+                        <h3 >Student List</h3>
+                        <div class="d-flex">
+                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="search" onkeyup="search()">
+                            
+                        </div>
+                        </div>
+                              <table   class="table table-success table-striped table-bordered mt-3">
+                             <thead>
+                                <tr style="text-align: center;">
+                                    <th>Id</th>
+                                  <th>First Name</th>
+                                  <th>Lastname</th>
+                                  <th>Email</th>
+                                  <th>Phone</th>
+                                  <th>Place</th>
+                                  <th>Date Of Birth</th>
+                                  <th>Username</th>
+                                 
+                                  <th>Department Id</th>
+                                  <th>Edit</th>
+                                </tr>
+                             </thead>
+                               
+                                     <tbody id="searchTable">
+                                         
+                                     </tbody>
+                                   
+                              </table>
+                        
+                        </div>
+                </div>
+            </div>
+
+            <div class="col-md-11" style="background-color: #c3c0d0; display: none;"  id="departments" >
+                <div class="container-fluid">
+                    <div class="row "> 
+                        <h3 class="mt-2">Department List</h3>
+                        
+                            <table class="table table-success table-striped table-bordered mt-3">
+                                <tr style="text-align: center;">
+                                    <th>Id</th>
+                                  <th>Department Name</th>
+                                  <th>HOD</th>
+                                  <th>Department Id</th>
+                                  <th>Edit</th>
+                                </tr>
+                                {{range .department}}
+                                        <tr class="text-center">
+                                            <td>{{.Id}}</td>
+                                           <td>{{.Dep_name}}</td>
+                                           <td>{{.Hod_name}}</td>
+                                           <td>{{.Dep_id}}</td>
+                                            
+                                            <td> <div class="d-flex flex-row justify-content-center mb-3">
+                                                <div style="width: 70px; margin-right: 15px;" ><button onclick="editDepartment()" class="btn btn-success w-100">
+                                                    <i class="fa-solid fa-pen-to-square"></i>
+                                                </button></div>
+                                                <div style="width: 70px;" ><a href="/delete/{{.Id}}/dep" class="btn btn-danger w-100">
+                                                 <i class="fa-solid fa-trash"></i>
+                                                </a></div>
+                                              </div></td>
+                                        </tr>
+                                    {{end}}
+                              </table>
+                        
+                        </div>
+                </div>
+            </div>
+
+            <div class="col-md-11 pt-5" style="display: none; position: relative;" id="admin">
+                <div class="container " style="padding-top: 84px;">
+                    <div class="row ">
+                        <div class="col-md-4 d-flex flex-column">
+                            <i style="font-size: 150px;" class="fa-solid fa-circle-user"></i>
+                           <div class="d-flex justify-content-center mt-4"> <button class=" w-50 btn btn btn-warning adt" onclick="addStudent()">Add student</button></div>
+                        </div>
+
+                        <div class="col-md-4 d-flex flex-column ">
+                            <i class="fa-solid fa-user-tie" style="font-size: 150px;"></i>
+                            <div class="d-flex justify-content-center mt-4"> <button class="btn btn btn-warning w-50 adt" onclick="addAdmin()">Add Admin</button></div>
+                        </div>
+
+
+                        <div class="col-md-4 d-flex flex-column ">
+                            <i style="font-size: 150px;" class="fa-solid fa-building"></i>
+                            <div class="d-flex justify-content-center mt-4"> <button class="btn btn btn-warning w-50 adt" onclick="addDepartment()">Add department</button></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12  pt-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                           
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg height="290px" width="350px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+viewBox="138 0 300 472" xml:space="preserve">
+<path style="fill:#D7B883;" d="M0,372c0,0,217-97,248-216l16-8l24,8c0,0-101,244-248,280H0V372z"/>
+<path style="fill:#BD8931;" d="M306,468H0v-32h228.4c28.432,0,56.224,8.416,79.88,24.184l0.072,0.048
+	C311.84,462.56,310.192,468,306,468z"/>
+<circle style="fill:#EB7361;" cx="360" cy="316" r="40"/>
+<g>
+	<path style="fill:#FDC567;" d="M464,420h-16c-4.416,0-8-3.584-8-8v-4c0-6.616-5.384-12-12-12s-12,5.384-12,12v4
+		c0,4.416-3.584,8-8,8h-32c-4.416,0-8-3.584-8-8s3.584-8,8-8h24.288c1.944-13.552,13.632-24,27.712-24s25.768,10.448,27.712,24H464
+		c4.416,0,8,3.584,8,8S468.416,420,464,420z"/>
+	<path style="fill:#FDC567;" d="M344,420h-8c-4.416,0-8-3.584-8-8s3.584-8,8-8h8c4.416,0,8,3.584,8,8S348.416,420,344,420z"/>
+	<path style="fill:#FDC567;" d="M408,452h-8c-4.416,0-8-3.584-8-8s3.584-8,8-8h8c4.416,0,8,3.584,8,8S412.416,452,408,452z"/>
+	<path style="fill:#FDC567;" d="M296,380h-32c-4.416,0-8-3.584-8-8v-8c0-4.408-3.592-8-8-8s-8,3.592-8,8v8c0,4.416-3.584,8-8,8
+		s-8-3.584-8-8v-8c0-13.232,10.768-24,24-24s24,10.768,24,24h24c4.416,0,8,3.584,8,8S300.416,380,296,380z"/>
+</g>
+<path style="fill:#FCB641;" d="M374.28,146.432l-25-14.432H448c0-26.512-21.488-48-48-48h-60.864l83.136-48
+	c-13.256-22.96-42.608-30.824-65.568-17.568L280,62.72V4c-26.512,0-48,21.488-48,48v11.648l-83.144-45.216
+	C125.896,5.176,96.536,13.04,83.288,36l83.136,48H105.56c-26.512,0-48,24-48,48h98.72l-24.992,14.432
+	c-26.4,15.24-48,52.656-48,83.136l0,0l173.208-77.68c4.696-2.432,10.272-2.4,14.936,0.104
+	C303.72,169.384,422.28,229.56,422.28,229.56l0,0C422.28,199.088,400.68,161.672,374.28,146.432z"/>
+<g>
+	<path style="fill:#FDC567;" d="M352,140h-40c-4.416,0-8-3.584-8-8s3.584-8,8-8h40c4.416,0,8,3.584,8,8S356.416,140,352,140z"/>
+	<path style="fill:#FDC567;" d="M304,108c-3.04,0-5.944-1.736-7.288-4.68c-1.832-4.024-0.056-8.768,3.968-10.6l35.144-16
+		c4.016-1.832,8.76-0.056,10.6,3.968c1.832,4.024,0.056,8.768-3.968,10.6l-35.144,16C306.24,107.768,305.112,108,304,108z"/>
+	<path style="fill:#FDC567;" d="M192,140h-40c-4.416,0-8-3.584-8-8s3.584-8,8-8h40c4.416,0,8,3.584,8,8S196.416,140,192,140z"/>
+	<path style="fill:#FDC567;" d="M201.56,108c-1.112,0-2.232-0.232-3.312-0.72l-35.144-16c-4.016-1.832-5.8-6.576-3.968-10.6
+		c1.832-4.016,6.56-5.784,10.6-3.968l35.144,16c4.016,1.832,5.8,6.576,3.968,10.6C207.504,106.264,204.6,108,201.56,108z"/>
+</g>
+<g>
+	<path style="fill:#BD8931;" d="M96.008,420c-2.432,0-4.832-1.104-6.408-3.2l-48-64c-2.656-3.536-1.936-8.552,1.6-11.2
+		c3.544-2.656,8.552-1.928,11.2,1.6l48,64c2.656,3.536,1.936,8.552-1.6,11.2C99.36,419.48,97.672,420,96.008,420z"/>
+	<path style="fill:#BD8931;" d="M152,372c-2.296,0-4.568-0.984-6.152-2.88l-40-48c-2.832-3.392-2.368-8.44,1.024-11.264
+		c3.384-2.832,8.44-2.376,11.264,1.024l40,48c2.832,3.392,2.368,8.44-1.024,11.264C155.624,371.392,153.808,372,152,372z"/>
+	<path style="fill:#BD8931;" d="M192,324c-2.344,0-4.672-1.024-6.248-3l-32-40c-2.76-3.448-2.2-8.488,1.248-11.24
+		c3.44-2.76,8.488-2.2,11.24,1.248l32,40c2.76,3.448,2.2,8.488-1.248,11.24C195.52,323.424,193.76,324,192,324z"/>
+	<path style="fill:#BD8931;" d="M232,276c-2.048,0-4.096-0.784-5.656-2.344l-32-32c-3.128-3.128-3.128-8.184,0-11.312
+		s8.184-3.128,11.312,0l32,32c3.128,3.128,3.128,8.184,0,11.312C236.096,275.216,234.048,276,232,276z"/>
+	<path style="fill:#BD8931;" d="M263.992,220c-1.2,0-2.424-0.272-3.568-0.84l-32-16c-3.952-1.976-5.552-6.784-3.576-10.736
+		c1.976-3.944,6.776-5.56,10.736-3.576l32,16c3.952,1.976,5.552,6.784,3.576,10.736C269.752,218.384,266.928,220,263.992,220z"/>
+</g>
+</svg>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+</body>
+</html>
